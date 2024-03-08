@@ -15,28 +15,8 @@
     <!--==========================
     Header
   ============================-->
-    <header id="header">
-      <div class="container">
-        <div id="logo" class="pull-left">
-          <!-- Uncomment below if you prefer to use a text logo -->
-          <h1><a href="#">E<span>V</span>ento</a></h1>
-          <a href="#intro" class="scrollto"
-            ><img src="img/logo.png" alt="" title=""
-          /></a>
-        </div>
+         @include('layouts.nav')
 
-        <nav id="nav-menu-container">
-          <ul class="nav-menu">
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Signup</a></li>
-              <li><a href="#">Account</a></li>
-            <li class="buy-tickets"><a href="">Dashboard</a></li>
-            <li class="buy-tickets"><a href="{{ route('addEvent') }}">New</a></li>
-          </ul>
-        </nav>
-        <!-- #nav-menu-container -->
-      </div>
-    </header>
     <!-- #header -->
 
     <!--==========================
@@ -104,7 +84,7 @@
                             <p>Held at <b>18/03/2024</b></p>
                         </div>
                     </div>
-                    <a href="" class="btn btn-outline-danger mx-auto">Get Ticket</a>
+                    <a href="{{ route('ticket') }}" class="btn btn-outline-danger mx-auto">Get Ticket</a>
                 </div>
             </div>
         </div>

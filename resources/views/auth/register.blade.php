@@ -44,7 +44,7 @@
             <label for="role">Role:</label>
             <select id="role" name="role" class="block mt-1 w-full">
                 <option value="user">User</option>
-                <option value="organisator">Organisator</option>
+                <option value="organisator">Organiser</option>
             </select>
         </div>
 

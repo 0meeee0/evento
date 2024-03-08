@@ -10,45 +10,13 @@
       <!--==========================
     Header
   ============================-->
-    <header id="header">
-      <div class="container">
-        <div id="logo" class="pull-left">
-          <!-- Uncomment below if you prefer to use a text logo -->
-          <h1><a href="{{ route('home') }}">E<span>V</span>ento</a></h1>
-          <a href="#intro" class="scrollto"
-            ><img src="img/logo.png" alt="" title=""
-          /></a>
-        </div>
-
-        <nav id="nav-menu-container">
-          <ul class="nav-menu">
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Signup</a></li>
-              <li><a href="#">Account</a></li>
-            <li class="buy-tickets"><a href="">Dashboard</a></li>
-            <li class="buy-tickets"><a href="{{ route('addEvent') }}">New</a></li>
-          </ul>
-        </nav>
-        <!-- #nav-menu-container -->
-      </div>
-    </header>
-        <section id="intro">
+    @include('layouts.nav')
+    <section id="intro">
       <div class="intro-container wow fadeIn">
-        <h1 class="mb-4 pb-0">
-          Create an<br /><span>Event</span> Now
-        </h1>
-        <p class="mb-4 pb-0">
-          Create, Reserve and Enjoy
-        </p>
-        
-        <a href="#here" class="about-btn scrollto">Let's Go</a>
+        <div class="container mt-5">
+      <div class="heading_container heading_center">
+        <h2 class="text-light" id="here">Create a New Event</h2>
       </div>
-    </section>
-
-    <div class="container mt-5">
-      <!-- <div class="heading_container heading_center">
-        <h2 id="here">Create a New Recipe</h2>
-      </div> -->
         <div>
             @if($errors->any())
             <ul>
@@ -61,22 +29,22 @@
             @endif
         </div>
 
-        <div class="container mb-5" id="here">
-          <form class="col-9 mx-auto" method="POST" action="" enctype="multipart/form-data">
+        <div class="container col-7 mb-5" id="here">
+          <form class="col-9 mx-auto text-white" method="POST" action="" enctype="multipart/form-data">
               @csrf
               @method('post')
               <div class="form-group">
                   <label for="name">Event Name:</label>
-                  <input type="text" name="name" id="name" class="form-control" required>
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Event Name" required>
               </div>
 
               <div class="form-group">
                   <label for="description">Description:</label>
-                  <textarea name="description" id="description" class="form-control" required></textarea>
+                  <textarea name="description" id="description" class="form-control" placeholder="Event Description" required></textarea>
               </div>
 
               <div class="form-group">
-                  <label for="category">Category:</label><br>
+                  <label for="category">Category:</label>
                   <select name="category" id="category">
                     <option value="">cat1</option>
                     <option value="">cat2</option>
@@ -84,22 +52,47 @@
                 </select>
               </div>
 
-              <div class="form-group">
-                  <label for="date">Event Date:</label>
-                  <input type="date" name="date" id="date" class="form-control" required>
-              </div>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="start_date" class="col-form-label">Event Start Date:</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="end_date" class="col-form-label">Event End Date:</label>
+                    <input type="date" name="end_date" id="end_date" class="form-control" required>
+                </div>
+            </div>
+
 
               <div class="form-group">
-                  <label for="image">Image:</label>
-                  <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                  <label for="name">Location:</label>
+                  <input type="text" name="location" id="location" class="form-control" placeholder="Event Location" required>
               </div>
 
+              <div>
+            <label for="accept">Reservations :</label>
+            <select id="accept" name="accept" class="block mt-1 w-full">
+                <option value="auto">Automatic</option>
+                <option value="manual">Manual</option>
+            </select>
+        </div>
               <button type="submit" class="btn btn-danger">Submit</button>
           </form>
         </div>
     </div>
+    </section>
 
      @include('layouts.scripts')
+    <!--=========================
+        Footer
+    ============================-->
+    <footer id="footer">
+        <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>EVENTO</strong>. All Rights Reserved
+        </div>
+        </div>
+    </footer>
 
 </body>
 </html>
