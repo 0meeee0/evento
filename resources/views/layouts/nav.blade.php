@@ -10,20 +10,30 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
 
-                    <!-- <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Signup</a></li>
+                   
+                    @auth
 
-                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li> -->
+                    @role('admin')
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    @endrole
+                    @role('organiser')
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('addEvent') }}">New</a></li>
+                    @endrole
                    <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-<x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                    <li><a href="{{ route('addEvent') }}">New</a></li>
+                    <!-- <x-dropdown-link :href="route('logout')"
+                                                        onclick="event.preventDefault();
+                                                                    this.closest('form').submit();">
+                                                    {{ __('Log Out') }}
+                    </x-dropdown-link> -->
 
+
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Signup</a></li>
+                    @endauth
                     
                 </ul>
             </nav>
