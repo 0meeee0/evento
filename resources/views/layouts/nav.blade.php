@@ -1,7 +1,7 @@
 <header id="header">
         <div class="container">
             <div id="logo" class="pull-left">
-                <h1><a href="#">E<span>V</span>ento</a></h1>
+                <h1><a href="/">E<span>V</span>ento</a></h1>
                 <a href="#intro" class="scrollto">
                     <img src="img/logo.png" alt="" title="">
                 </a>
@@ -17,8 +17,11 @@
                     <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     @endrole
                     @role('organiser')
-                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('orgDashboard') }}">Dashboard</a></li>
                     <li><a href="{{ route('addEvent') }}">New</a></li>
+                    @endrole
+                    @role('user')
+                    <li><a href="{{ route('myRes') }}">My Reservations</a></li>
                     @endrole
                    <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}

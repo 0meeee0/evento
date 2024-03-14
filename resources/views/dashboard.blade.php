@@ -18,15 +18,16 @@
                                 <tr>
                                     <th class="px-4 py-2">Name</th>
                                     <th class="px-4 py-2">Email</th>
-                                    <th class="px-4 py-2">Role</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($users as $u)
+                                    
                                 <tr>
-                                    <td class="border px-4 py-2">test</td>
-                                    <td class="border px-4 py-2">test@test.test</td>
-                                    <td class="border px-4 py-2">Admin</td>
+                                    <td class="border px-4 py-2">{{ $u->name }}</td>
+                                    <td class="border px-4 py-2">{{ $u->email }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -46,37 +47,54 @@
                             <thead>
                                 <tr>
                                     <th class="px-4 py-2">Category</th>
-                                    <th class="px-4 py-2">Modify</th>
-                                    <th class="px-4 py-2">Delete</th>
+                                    <th class="px-4 py-2">Action</th>
+                                    {{-- <th class="px-4 py-2">Delete</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($cat as $c)
                                 <tr>
-                                    <td class="border px-4 py-2">Music</td>
+                                    <td class="border px-4 py-2">{{$c->name}}</td>
                                     <td class="border px-4 py-2">
-                                        <a href="#" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+                                        {{-- <a href="#" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
                                             Modify
-                                        </a>
-                                    </td>
+                                        </a> --}}
+                                        <form action="{{ route('modifiedCat', $c) }}" method="POST">
+                                            @method('put')
+                                            @csrf
+                                            <input type="text" name="modifiedCat" placeholder="{{$c->name}}">
+                                            <button type="submit">Modify</button>
+
+                                        </form>
+                                    </td> 
                                     <td class="border px-4 py-2">
-                                        <a href="#" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+                                        {{-- <a href="#" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
                                             Delete
-                                        </a>
+                                        </a> --}}
+                                        <form action="{{ route('deleteCat', $c) }} " method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" >Delete</button>
+                                        </form>
                                     </td>
+                                    @endforeach
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="mt-4">
-                        <a href="#" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
-                            Add Category
-                        </a>
+                    <div class="mt-4 flex">
+                        <form action="{{route('addCat')}}" method="POST">
+                            @csrf
+                            <input name="name" type="text" class=" border border-gray-300 rounded-l px-4 py-2" placeholder="Add Another Category">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-r">Apply</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -93,15 +111,28 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($events as $event)
                                 <tr>
-                                    <td class="border px-4 py-2">Event 1</td>
-                                    <td class="border px-4 py-2">Organiser 1</td>
+                                    <td class="border px-4 py-2">{{ $event->title }}</td>
+                                    <td class="border px-4 py-2">{{ $event->user->name }}</td>
                                     <td class="border px-4 py-2">
-                                        <a href="#" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
-                                            Deny
-                                        </a>
+                                        <form action="{{ route('event.accept', ['event' => $event->id]) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="">
+                                                <button type="submit">Accept</button>
+                                            </div>
+                                        </form>
+                                        <form action="{{ route('event.deny', ['event' => $event->id]) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="">
+                                                <button type="submit">Deny</button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
